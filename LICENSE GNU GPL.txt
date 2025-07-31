@@ -1,0 +1,87 @@
+Llicència Pública General de GNU v3.0
+
+Aquest document conté el text complet de la llicència en diversos idiomes.
+
+Català, anglès i castellà
+
+Copyright (C) 2007 Free Software Foundation, Inc. https://fsf.org/
+
+Es permet la còpia i distribució de còpies literals d'aquest document de llicència, però no se'n permet la modificació.
+
+Preàmbul
+
+La Llicència Pública General de GNU és una llicència lliure, de tipus "copyleft", per a programari i altres tipus d'obres.
+
+Les llicències de la majoria del programari i altres obres pràctiques estan dissenyades per treure-us la llibertat de compartir i canviar les obres. Per contra, la Llicència Pública General de GNU pretén garantir la vostra llibertat de compartir i canviar totes les versions d'un programa, per assegurar-se que romangui com a programari lliure per a tots els seus usuaris. Nosaltres, la Free Software Foundation, fem servir la Llicència Pública General de GNU per a la major part del nostre programari; també s'aplica a qualsevol altra obra publicada d'aquesta manera pels seus autors. Vós també podeu aplicar-la als vostres programes.
+
+Quan parlem de programari lliure, ens referim a la llibertat, no al preu. Les nostres Llicències Públiques Generals estan dissenyades per assegurar que tingueu la llibertat de distribuir còpies de programari lliure (i cobrar per elles si ho desitgeu), que rebeu el codi font o el pugueu obtenir si ho voleu, que pugueu canviar el programari o utilitzar-ne parts en nous programes lliures, i que sapigueu que podeu fer aquestes coses.
+
+Per protegir els vostres drets, necessitem evitar que altres us neguin aquests drets o us demanin que hi renuncieu. Per tant, teniu certes responsabilitats si distribuïu còpies del programari, o si el modifiqueu: responsabilitats de respectar la llibertat dels altres.
+
+(El text complet dels termes i condicions és molt extens. Es pot trobar la traducció no oficial completa a: https://www.gnu.org/licenses/gpl-3.0.ca.html)
+
+Com aplicar aquests termes a "Printful Product Tool"
+
+Copyright (C) 2025 Roger Vilanova
+
+Aquest programa és programari lliure: podeu redistribuir-lo i/o modificar-lo sota els termes de la Llicència Pública General de GNU publicada per la Free Software Foundation, ja sigui la versió 3 de la Llicència, o (a la vostra opció) qualsevol versió posterior.
+
+Aquest programa es distribueix amb l'esperança que sigui útil, però SENSE CAP GARANTIA; sense ni tan sols la garantia implícita de COMERCIALITZACIÓ o IDONEÏTAT PER A UN PROPÒSIT PARTICULAR. Vegeu la Llicència Pública General de GNU per a més detalls.
+
+Hauríeu d'haver rebut una còpia de la Llicència Pública General de GNU juntament amb aquest programa. Si no, vegeu https://www.gnu.org/licenses/.
+
+English Version (Official)
+
+Copyright © 2007 Free Software Foundation, Inc. https://fsf.org/
+
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+
+Preamble
+
+The GNU General Public License is a free, copyleft license for software and other kinds of works.
+
+The licenses for most software and other practical works are designed to take away your freedom to share and change the works. By contrast, the GNU General Public License is intended to guarantee your freedom to share and change all versions of a program--to make sure it remains free software for all its users. We, the Free Software Foundation, use the GNU General Public License for most of our software; it applies also to any other work released this way by its authors. You can apply it to your programs, too.
+
+When we speak of free software, we are referring to freedom, not price. Our General Public Licenses are designed to make sure that you have the freedom to distribute copies of free software (and charge for them if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs, and that you know you can do these things.
+
+To protect your rights, we need to prevent others from denying you these rights or asking you to surrender the rights. Therefore, you have certain responsibilities if you distribute copies of the software, or if you modify it: responsibilities to respect the freedom of others.
+
+(The full text of the terms and conditions is extensive. You can find the official version at: https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+How to Apply These Terms to "Printful Product Tool"
+
+Copyright (C) 2025 Roger Vilanova
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see https://www.gnu.org/licenses/.
+
+Versión en Español (Traducción no oficial)
+
+Copyright © 2007 Free Software Foundation, Inc. https://fsf.org/
+
+Se permite la copia y distribución de copias literales de este documento de licencia, pero no se permite su modificación.
+
+Preámbulo
+
+La Licencia Pública General de GNU es una licencia libre, de tipo "copyleft", para software y otros tipos de obras.
+
+Las licencias de la mayoría del software y otras obras prácticas están diseñadas para quitarle la libertad de compartir y modificar las obras. Por el contrario, la Licencia Pública General de GNU pretende garantizar su libertad de compartir y modificar todas las versiones de un programa, para asegurarse de que siga siendo software libre para todos sus usuarios. Nosotros, la Free Software Foundation, usamos la Licencia Pública General de GNU para la mayor parte de nuestro software; también se aplica a cualquier otra obra publicada de esta manera por sus autores. Usted también puede aplicarla a sus programas.
+
+Cuando hablamos de software libre, nos referimos a la libertad, no al precio. Nuestras Licencias Públicas Generales están diseñadas para asegurar que usted tenga la libertad de distribuir copias de software libre (y cobrar por ello si lo desea), que reciba el código fuente o pueda obtenerlo si lo desea, que pueda modificar el software o usar partes de él en nuevos programas libres, y que sepa que puede hacer estas cosas.
+
+Para proteger sus derechos, necesitamos evitar que otros le nieguen estos derechos o le pidan que renuncie a ellos. Por lo tanto, usted tiene ciertas responsabilidades si distribuye copias del software, o si lo modifica: responsabilidades de respetar la libertad de los demás.
+
+(El texto completo de los términos y condiciones es muy extenso. Se puede encontrar la traducción no oficial completa en: https://www.gnu.org/licenses/gpl-3.0.es.html)
+
+Cómo aplicar estos términos a "Printful Product Tool"
+
+Copyright (C) 2025 Roger Vilanova
+
+Este programa es software libre: usted puede redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General de GNU publicada por la Free Software Foundation, ya sea la versión 3 de la Licencia, o (a su elección) cualquier versión posterior.
+
+Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA; sin siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Vea la Licencia Pública General de GNU para más detalles.
+
+Usted debería haber recibido una copia de la Licencia Pública General de GNU junto con este programa. Si no, vea https://www.gnu.org/licenses/.
