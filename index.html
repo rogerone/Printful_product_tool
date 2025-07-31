@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eina d'Importació i Exportació per a Printful</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid transparent;
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-primary { background-color: #4f46e5; color: white; }
+        .btn-primary:not(:disabled):hover { background-color: #4338ca; transform: translateY(-2px); }
+        .btn-secondary { background-color: #10b981; color: white; }
+        .btn-secondary:not(:disabled):hover { background-color: #059669; }
+        .btn-success { background-color: #22c55e; color: white; }
+        .btn-success:not(:disabled):hover { background-color: #16a34a; }
+        #message-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            color: white;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #message-box.show { opacity: 1; transform: translateY(0); }
+        #message-box.success { background-color: #10b981; }
+        #message-box.error { background-color: #ef4444; }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .tab {
+            padding: 0.75rem 1.25rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            color: #6b7280;
+        }
+        .tab.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-8 max-w-5xl">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-900">Eina d'Importació i Exportació per a Printful</h1>
+            <p class="mt-2 text-lg text-gray-600">Gestiona els teus productes massivament.</p>
+        </header>
+
+        <!-- Pas 1: API Key -->
+        <div class="bg-white p-8 rounded-xl shadow-md mb-8">
+            <h2 class="text-2xl font-semibold mb-2">Pas 1: Connecta't a Printful</h2>
+            <p class="text-gray-600 mb-6">Introdueix la teva clau API per començar. La clau només s'utilitza per a aquesta sessió i no es desa.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="password" id="apiKey" placeholder="Enganxa la teva clau API aquí" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                <button id="connectBtn" class="btn btn-primary">Connectar</button>
+            </div>
+        </div>
+
+        <!-- Pas 2: Funcionalitats -->
+        <div id="main-content" class="hidden">
+            <div class="flex border-b border-gray-200 mb-6">
+                <div id="tab-export" class="tab active">Exportar Productes</div>
+                <div id="tab-import" class="tab">Importar Productes</div>
+            </div>
+
+            <!-- Secció d'Exportació -->
+            <div id="export-section">
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-semibold mb-6">Exportar Productes Existents</h2>
+                    <div id="loader-export" class="flex justify-center items-center h-40"><div class="loader"></div></div>
+                    <div id="export-content" class="hidden">
+                         <div class="flex flex-wrap gap-4 mb-6 pb-6 border-b border-gray-200">
+                            <button id="exportCsvBtn" class="btn btn-secondary">Descarregar CSV</button>
+                            <button id="exportXmlBtn" class="btn btn-secondary">Descarregar XML</button>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Productes Trobats (<span id="productCount">0</span>)</h3>
+                        <div id="productList" class="max-h-96 overflow-y-auto space-y-4 pr-4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secció d'Importació -->
+            <div id="import-section" class="hidden">
+                 <div class="bg-white p-8 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-semibold mb-2">Importar Productes des d'un Fitxer</h2>
+                    <p class="text-gray-600 mb-6">Puja un arxiu CSV per crear nous productes a la teva botiga. Assegura't que el fitxer té les columnes correctes: `product_name`, `variant_id`, `retail_price`, `print_file_url`, `thumbnail_url`.</p>
+                    
+                    <form id="importForm" class="space-y-6">
+                        <div>
+                            <label for="importFile" class="block text-sm font-medium text-gray-700 mb-2">Selecciona un fitxer (.csv):</label>
+                            <input type="file" id="importFile" name="importFile" accept=".csv" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" required>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-success w-full sm:w-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                                Pujar i Importar Productes
+                            </button>
+                        </div>
+                    </form>
+                    <div id="import-loader" class="hidden flex-col items-center mt-6">
+                        <div class="loader"></div>
+                        <p class="mt-4 text-gray-600">Processant la importació, si us plau espera...</p>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="message-box"></div>
+
+    <script>
+        // Elements de la UI
+        const apiKeyInput = document.getElementById('apiKey');
+        const connectBtn = document.getElementById('connectBtn');
+        const mainContent = document.getElementById('main-content');
+        const messageBox = document.getElementById('message-box');
+
+        // Tabs
+        const tabExport = document.getElementById('tab-export');
+        const tabImport = document.getElementById('tab-import');
+        const exportSection = document.getElementById('export-section');
+        const importSection = document.getElementById('import-section');
+
+        // Secció d'Exportació
+        const loaderExport = document.getElementById('loader-export');
+        const exportContent = document.getElementById('export-content');
+        const productList = document.getElementById('productList');
+        const productCount = document.getElementById('productCount');
+        const exportCsvBtn = document.getElementById('exportCsvBtn');
+        const exportXmlBtn = document.getElementById('exportXmlBtn');
+
+        // Secció d'Importació
+        const importForm = document.getElementById('importForm');
+        const importFile = document.getElementById('importFile');
+        const importLoader = document.getElementById('import-loader');
+
+        function showMessage(text, type = 'success') {
+            messageBox.textContent = text;
+            messageBox.className = `show ${type}`;
+            setTimeout(() => messageBox.classList.remove('show'), 5000);
+        }
+
+        // Tabs Logic
+        tabExport.addEventListener('click', () => {
+            tabExport.classList.add('active');
+            tabImport.classList.remove('active');
+            exportSection.classList.remove('hidden');
+            importSection.classList.add('hidden');
+        });
+
+        tabImport.addEventListener('click', () => {
+            tabImport.classList.add('active');
+            tabExport.classList.remove('active');
+            importSection.classList.remove('hidden');
+            exportSection.classList.add('hidden');
+        });
+
+        // Connexió inicial
+        connectBtn.addEventListener('click', async () => {
+            const apiKey = apiKeyInput.value.trim();
+            if (!apiKey) {
+                showMessage('Si us plau, introdueix una clau API de Printful.', 'error');
+                return;
+            }
+            
+            connectBtn.disabled = true;
+            connectBtn.textContent = 'Connectant...';
+            mainContent.classList.remove('hidden');
+            loaderExport.classList.remove('hidden');
+            exportContent.classList.add('hidden');
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'fetch_products');
+                formData.append('api_key', apiKey);
+
+                const response = await fetch('api.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (!response.ok) throw new Error(result.message || 'Error desconegut.');
+                
+                displayProducts(result.data);
+                showMessage(`Connectat! S'han carregat ${result.data.length} productes.`);
+
+            } catch (error) {
+                showMessage(error.message, 'error');
+                mainContent.classList.add('hidden');
+            } finally {
+                loaderExport.classList.add('hidden');
+                connectBtn.disabled = false;
+                connectBtn.textContent = 'Connectar';
+            }
+        });
+
+        function displayProducts(products) {
+            exportContent.classList.remove('hidden');
+            productList.innerHTML = '';
+            productCount.textContent = products.length;
+
+            if (products.length === 0) {
+                productList.innerHTML = '<p class="text-gray-500">No s\'han trobat productes sincronitzats.</p>';
+                return;
+            }
+
+            products.forEach(product => {
+                const imageUrl = product.sync_variants[0]?.product.image || 'https://placehold.co/80x80/e2e8f0/4a5568?text=Imatge';
+                productList.innerHTML += `
+                    <div class="p-4 border rounded-lg bg-gray-50 flex items-start gap-4">
+                        <img src="${imageUrl}" alt="${product.name}" class="w-20 h-20 object-cover rounded-md">
+                        <div class="flex-grow">
+                            <h4 class="font-semibold text-lg">${product.name}</h4>
+                            <p class="text-sm text-gray-600">ID: ${product.id} | ${product.sync_variants.length} variants</p>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        // Lògica d'Exportació
+        exportCsvBtn.addEventListener('click', () => window.location.href = 'api.php?action=export_csv');
+        exportXmlBtn.addEventListener('click', () => window.location.href = 'api.php?action=export_xml');
+        
+        // Lògica d'Importació
+        importForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!importFile.files.length) {
+                showMessage('Si us plau, selecciona un fitxer per importar.', 'error');
+                return;
+            }
+
+            importLoader.classList.remove('hidden');
+            const submitBtn = importForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('action', 'import_products');
+            formData.append('importFile', importFile.files[0]);
+
+            try {
+                const response = await fetch('api.php', { method: 'POST', body: formData });
+                const result = await response.json();
+
+                if (!response.ok) throw new Error(result.message);
+                
+                showMessage(result.message, 'success');
+                importForm.reset();
+
+            } catch (error) {
+                showMessage(error.message, 'error');
+            } finally {
+                importLoader.classList.add('hidden');
+                submitBtn.disabled = false;
+            }
+        });
+
+    </script>
+</body>
+</html>
