@@ -34,7 +34,7 @@ Una clau d'API de Printful amb permisos per llegir i escriure productes.
 🚀 Instal·lació i Configuració
 Clona o descarrega el repositori:
 
-git clone https://github.com/el-teu-usuari/el-teu-repositori.git
+git clone https://github.com/rogerone/Printful_product_tool.git
 
 O descarrega el ZIP i descomprimeix-lo al directori del teu servidor web.
 
@@ -114,7 +114,7 @@ A Printful API key with permissions to read and write products.
 🚀 Installation and Setup
 Clone or download the repository:
 
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/rogerone/Printful_product_tool .git
 
 Or download the ZIP and unzip it in your web server's directory.
 
@@ -194,7 +194,7 @@ Una clave de API de Printful con permisos para leer y escribir productos.
 🚀 Instalación y Configuración
 Clona o descarga el repositorio:
 
-git clone https://github.com/tu-usuario/tu-repositorio.git
+git clone https://github.com/rogerone/Printful_product_tool .git
 
 O descarga el ZIP y descomprímelo en el directorio de tu servidor web.
 
